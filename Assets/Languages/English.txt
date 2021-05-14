@@ -1,0 +1,8 @@
+{
+	"LanguageName": "English",
+	"Version": "v1",
+	"TitleScout": "Scout",
+	"TitleScout": "Analyze",
+	"TitleScout": "Settings",
+	"TitleScout": "Quit"
+}
