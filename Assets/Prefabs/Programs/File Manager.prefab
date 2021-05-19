@@ -2087,7 +2087,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Date Created
+  m_Text: Date Modified
 --- !u!1 &7842367184498271899
 GameObject:
   m_ObjectHideFlags: 0
