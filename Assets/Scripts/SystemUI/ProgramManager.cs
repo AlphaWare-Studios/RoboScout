@@ -53,7 +53,7 @@ public class ProgramManager : MonoBehaviour
                             Program.transform.SetAsLastSibling();
                         }
                         Pos = Program.transform.position;
-                        Pos.x = Mathf.Clamp(Pos.x, 400, 1520);
+                        Pos.x = Mathf.Clamp(Pos.x, 4, 1520);
                         Pos.y = Mathf.Clamp(Pos.y, -90, 725);
                         Program.transform.position = Pos;
                     }
@@ -66,6 +66,32 @@ public class ProgramManager : MonoBehaviour
                         }
                         Pos = Program.transform.position;
                         Pos.x = Mathf.Clamp(Pos.x, 400, 1520);
+                        Pos.y = Mathf.Clamp(Pos.y, 132.5f, 947.5f);
+                        Program.transform.position = Pos;
+                    }
+                    break;
+                case "File Manager":
+                    if (!Program.gameObject.GetComponent<FileExplorer>().isMinimized)
+                    {
+                        if (Toolbar.GetComponent<ToolbarManager>().dragging)
+                        {
+                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - (350 * OffsetY));
+                            Program.transform.SetAsLastSibling();
+                        }
+                        Pos = Program.transform.position;
+                        Pos.x = Mathf.Clamp(Pos.x, 600, 1320);
+                        Pos.y = Mathf.Clamp(Pos.y, 480, 600);
+                        Program.transform.position = Pos;
+                    }
+                    else
+                    {
+                        if (Toolbar.GetComponent<ToolbarManager>().dragging)
+                        {
+                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - OffsetY);
+                            Program.transform.SetAsLastSibling();
+                        }
+                        Pos = Program.transform.position;
+                        Pos.x = Mathf.Clamp(Pos.x, 600, 1320);
                         Pos.y = Mathf.Clamp(Pos.y, 132.5f, 947.5f);
                         Program.transform.position = Pos;
                     }

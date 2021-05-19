@@ -7,8 +7,8 @@ public class StartManager : MonoBehaviour
     public GameObject ApplicationWindow;
     public GameObject Calculator;
     public GameObject Notepad;
+    public GameObject FileManager;
     public GameObject Music;
-    public GameObject Browser;
     public GameObject Console;
     public Transform Programs;
     public bool isStartMenuOpen;
@@ -19,6 +19,7 @@ public class StartManager : MonoBehaviour
     float OffsetY;
     bool hasCalculatored;
     bool hasNotepaded;
+    bool hasFileded;
     bool hasMusiced;
     bool hasConsoled;
 
@@ -50,10 +51,18 @@ public class StartManager : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.Alpha3))
             {
+                if (!hasFileded)
+                {
+                    hasFileded = true;
+                    StartCoroutine(OpenProgramShortcut(FileManager, "File Manager", 3));
+                }
+            }
+            if (Input.GetKey(KeyCode.Alpha4))
+            {
                 if (!hasMusiced)
                 {
                     hasMusiced = true;
-                    StartCoroutine(OpenProgramShortcut(Music, "Music", 3));
+                    StartCoroutine(OpenProgramShortcut(Music, "Music", 4));
                 }
             }
             if (Input.GetKey(KeyCode.C))
@@ -61,7 +70,7 @@ public class StartManager : MonoBehaviour
                 if (!hasConsoled)
                 {
                     hasConsoled = true;
-                    StartCoroutine(OpenProgramShortcut(Console, "Console", 4));
+                    StartCoroutine(OpenProgramShortcut(Console, "Console", 5));
                 }
             }
         }
@@ -91,6 +100,9 @@ public class StartManager : MonoBehaviour
             case "Notepad":
                 Program.GetComponent<Notepad>().Wake();
                 break;
+            case "File Manager":
+                Program.GetComponent<FileExplorer>().Wake();
+                break;
             case "Music":
                 Program.GetComponent<Music>().Wake();
                 break;
@@ -114,9 +126,13 @@ public class StartManager : MonoBehaviour
         }
         if (ProgramBool == 3)
         {
-            hasMusiced = false;
+            hasFileded = false;
         }
         if (ProgramBool == 4)
+        {
+            hasMusiced = false;
+        }
+        if (ProgramBool == 5)
         {
             hasConsoled = false;
         }
@@ -137,6 +153,9 @@ public class StartManager : MonoBehaviour
                 break;
             case "Notepad":
                 Program.GetComponent<Notepad>().Wake();
+                break;
+            case "File Manager":
+                Program.GetComponent<FileExplorer>().Wake();
                 break;
             case "Music":
                 Program.GetComponent<Music>().Wake();
@@ -196,6 +215,9 @@ public class StartManager : MonoBehaviour
             case "Notepad":
                 OpenProgram(Notepad, "Notepad", null);
                 break;
+            case "File Manager":
+                OpenProgram(FileManager, "File Manager", null);
+                break;
             case "Music":
                 OpenProgram(Music, "Music", null);
                 break;
@@ -218,6 +240,9 @@ public class StartManager : MonoBehaviour
                 return true;
             case "Notepad":
                 OpenProgram(Notepad, "Notepad", Arguments);
+                return true;
+            case "FileManager":
+                OpenProgram(FileManager, "File Manager", Arguments);
                 return true;
             case "Music":
                 OpenProgram(Music, "Music", Arguments);

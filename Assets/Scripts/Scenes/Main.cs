@@ -56,12 +56,18 @@ public class Main : MonoBehaviour
             ChangelogTitle.text = "Welcome to RoboScout " + Application.version;
             Changelog.SetActive(true);
         }
+        //StartCoroutine(SendTeamNum(Settings));
+    }
+
+    IEnumerator SendTeamNum(SettingsClass Settings)
+    {
         using (AlphaWareWebHook AWWeb = new AlphaWareWebHook())
         {
             AWWeb.WebHook = "http://alphawarestudios.com/Data/RoboScoutTeamGetter.php";
             AWWeb.SendMessage(Passcode, Settings.TeamNumber);
             AWWeb.Dispose();
         }
+        return null;
     }
 
     IEnumerator GetAWStatus()
