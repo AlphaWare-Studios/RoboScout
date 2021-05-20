@@ -20,6 +20,9 @@ TextureImporter:
   - first:
       213: -1863859237976802683
     second: Icons_5
+  - first:
+      213: 7576617242518483205
+    second: Icons_6
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -51,8 +54,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -266,6 +269,27 @@ TextureImporter:
       bones: []
       spriteID: 58aff01f5ed3226e0800000000000000
       internalID: -1863859237976802683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Icons_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 0
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 501f96b4d3d852960800000000000000
+      internalID: 7576617242518483205
       vertices: []
       indices: 
       edges: []
