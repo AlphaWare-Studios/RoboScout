@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="500px" src="Assets/Sprites/RS Logo.png">
+  <img width="250px" src="Assets/Sprites/RS Logo.png">
 </p>
 
 # RoboScout
