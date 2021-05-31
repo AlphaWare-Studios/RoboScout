@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 public class AWManager : MonoBehaviour
 {
     string AWURL = "alphawarestudios.com";
-    private readonly string AWStatusURL = "/Data/RoboScout";
+    private readonly string AWStatusURL = "/Data/RoboScout.json";
     private readonly string AWTeamsURL = "/Data/RoboScoutTeams.txt";
     public AWClass AWStatusData;
     public string AWTeamsData;
