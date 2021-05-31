@@ -7,7 +7,7 @@ public class AWManager : MonoBehaviour
 {
     string AWURL = "alphawarestudios.com";
     private readonly string AWStatusURL = "/Data/RoboScout";
-    private readonly string AWTeamsURL = "/Data/RoboScoutTeams";
+    private readonly string AWTeamsURL = "/Data/RoboScoutTeams.txt";
     public AWClass AWStatusData;
     public string AWTeamsData;
     public bool AWStatusDone = false;
@@ -34,7 +34,7 @@ public class AWManager : MonoBehaviour
 
     IEnumerator GetAWStatusCoroutine()
     {
-        StartCoroutine(GetRequest("http://" + AWURL + AWStatusURL, (UnityWebRequest Request) =>
+        StartCoroutine(GetRequest("https://" + AWURL + AWStatusURL, (UnityWebRequest Request) =>
         {
             if (Request.result == UnityWebRequest.Result.Success)
             {
@@ -62,7 +62,7 @@ public class AWManager : MonoBehaviour
 
     IEnumerator GetAWTeamsCoroutine()
     {
-        StartCoroutine(GetRequest("http://" + AWURL + AWTeamsURL, (UnityWebRequest Request) =>
+        StartCoroutine(GetRequest("https://" + AWURL + AWTeamsURL, (UnityWebRequest Request) =>
         {
             if (Request.result == UnityWebRequest.Result.Success)
             {

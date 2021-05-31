@@ -66,7 +66,7 @@ public class ErrorManager : MonoBehaviour
 	{
 		using (DiscordWebHook dcWeb = new DiscordWebHook())
 		{
-			dcWeb.ProfilePicture = "http://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png";
+			dcWeb.ProfilePicture = "https://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png";
 			dcWeb.UserName = "RoboScout Error Report";
 			dcWeb.WebHook = "https://discord.com/api/webhooks/782645093906776074/pTbpLXHqeovb_BDuSwcWohfX9CZSWn6J1ssC5S08UGsjeuWL4xkJcktc7SgVnacAc8JR";
 			string Message = Error;

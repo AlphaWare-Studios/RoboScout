@@ -48,7 +48,7 @@ public class HelpManager : MonoBehaviour
                 Manager.GetComponent<ViewManager>().ShowCredits();
                 break;
             case "Feedback":
-                Manager.GetComponent<ExternalLinks>().ExternalLink("http://alphawarestudios.com/Feedback");
+                Manager.GetComponent<ExternalLinks>().ExternalLink("https://alphawarestudios.com/Feedback");
                 break;
         }
         HelpMenuClose();

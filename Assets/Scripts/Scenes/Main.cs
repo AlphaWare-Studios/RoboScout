@@ -63,7 +63,7 @@ public class Main : MonoBehaviour
     {
         using (AlphaWareWebHook AWWeb = new AlphaWareWebHook())
         {
-            AWWeb.WebHook = "http://alphawarestudios.com/Data/RoboScoutTeamGetter.php";
+            AWWeb.WebHook = "https://alphawarestudios.com/Data/RoboScoutTeamGetter.php";
             AWWeb.SendMessage(Passcode, Settings.TeamNumber);
             AWWeb.Dispose();
         }
@@ -133,7 +133,7 @@ public class Main : MonoBehaviour
 
     public void UpdateLink()
     {
-        Manager.GetComponent<ExternalLinks>().ExternalLink("http://Alphawarestudios.com/RoboScout");
+        Manager.GetComponent<ExternalLinks>().ExternalLink("https://Alphawarestudios.com/RoboScout");
     }
 
     public void Confirm()
