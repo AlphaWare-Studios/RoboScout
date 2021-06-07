@@ -9,7 +9,6 @@ public class StartManager : MonoBehaviour
     public GameObject Notepad;
     public GameObject FileManager;
     public GameObject Music;
-    public GameObject StreamViewer;
     public GameObject Console;
     public Transform Programs;
     public bool isStartMenuOpen;
@@ -24,7 +23,6 @@ public class StartManager : MonoBehaviour
     bool hasNotepaded;
     bool hasFileded;
     bool hasMusiced;
-    bool hasStreamed;
     bool hasConsoled;
 
     public void Wake()
@@ -68,14 +66,6 @@ public class StartManager : MonoBehaviour
                     StartCoroutine(OpenProgramShortcut(Music, "Music", 4));
                 }
             }
-            if (Input.GetKey(KeyCode.Alpha5))
-            {
-                if (!hasStreamed)
-                {
-                    hasStreamed = true;
-                    StartCoroutine(OpenProgramShortcut(StreamViewer, "Stream Viewer", 5));
-                }
-            }
             if (Input.GetKey(KeyCode.C))
             {
                 if (!hasConsoled)
@@ -117,9 +107,6 @@ public class StartManager : MonoBehaviour
             case "Music":
                 Program.GetComponent<Music>().Wake();
                 break;
-            case "Stream Viewer":
-                Program.GetComponent<StreamViewer2>().Wake();
-                break;
             case "Console":
                 Program.GetComponent<Console>().Wake();
                 break;
@@ -145,10 +132,6 @@ public class StartManager : MonoBehaviour
         if (ProgramBool == 4)
         {
             hasMusiced = false;
-        }
-        if (ProgramBool == 5)
-        {
-            hasStreamed = false;
         }
         if (ProgramBool == 6)
         {
@@ -177,9 +160,6 @@ public class StartManager : MonoBehaviour
                 break;
             case "Music":
                 Program.GetComponent<Music>().Wake();
-                break;
-            case "Stream Viewer":
-                Program.GetComponent<StreamViewer2>().Wake();
                 break;
             case "Console":
                 Program.GetComponent<Console>().Wake();
@@ -242,9 +222,6 @@ public class StartManager : MonoBehaviour
             case "Music":
                 OpenProgram(Music, "Music", null);
                 break;
-            case "Stream Viewer":
-                OpenProgram(StreamViewer, "Stream Viewer", null);
-                break;
             case "Console":
                 OpenProgram(Console, "Console", null);
                 break;
@@ -270,9 +247,6 @@ public class StartManager : MonoBehaviour
                 return true;
             case "Music":
                 OpenProgram(Music, "Music", Arguments);
-                return true;
-            case "StreamViewer":
-                OpenProgram(StreamViewer, "Stream Viewer", Arguments);
                 return true;
             case "Console":
                 OpenProgram(Console, "Console", Arguments);
