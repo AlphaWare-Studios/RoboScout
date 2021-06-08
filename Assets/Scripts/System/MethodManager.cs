@@ -67,6 +67,7 @@ public class MethodManager : MonoBehaviour
 			Manager.GetComponent<DiscordRP>().Frame();
 			Manager.GetComponent<Paralax>().Frame();
 			Manager.GetComponent<ProgramManager>().Frame();
+			Manager.GetComponent<Screenshot>().Frame();
 			MainManager.GetComponent<Splash>().Frame();
 			QRManager.GetComponent<QR>().Frame();
 			StartManager.GetComponent<StartManager>().Frame();
