@@ -65,6 +65,10 @@ public class Init : MonoBehaviour
         {
             Directory.CreateDirectory(FilesDataClass.FilePathMusic);
         }
+        if (!Directory.Exists(FilesDataClass.FilePathScreenshots))
+        {
+            Directory.CreateDirectory(FilesDataClass.FilePathScreenshots);
+        }
         string[] args = Environment.GetCommandLineArgs();
         if (args.Length > 0)
         {

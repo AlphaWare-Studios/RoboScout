@@ -13,6 +13,7 @@ public class FilesDataClass : MonoBehaviour
     public static string FilePathPlugins = Path.Combine(FilePath, "Plugins");
     public static string FilePathNotepad = Path.Combine(FilePath, "Notepad");
     public static string FilePathMusic = Path.Combine(FilePath, "Music");
+    public static string FilePathScreenshots = Path.Combine(FilePath, "Screenshots");
 }
 
 [Serializable]

@@ -1,15 +1,11 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 
 public class Screenshot : MonoBehaviour
 {
-    public Camera MainCamera;
-
-    public void Wake()
-    {
-        
-    }
+    public GameObject Manager;
 
     public void Frame()
     {
@@ -21,6 +17,21 @@ public class Screenshot : MonoBehaviour
 
     public void TakeScreenshot()
     {
-        
+        Texture2D Texture;
+        StartCoroutine(RecordFrame(Tex =>
+        {
+            Texture = Tex;
+            Texture.Apply();
+            byte[] Bytes = Texture.EncodeToPNG();
+            File.WriteAllBytes(FilesDataClass.FilePathScreenshots + "/" + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".png", Bytes);
+            Manager.GetComponent<ErrorManager>().Log("Screenshot Saved as " + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".png");
+        }));
+    }
+
+    static IEnumerator RecordFrame(System.Action<Texture2D> callback)
+    {
+        yield return new WaitForEndOfFrame();
+        var Texture = ScreenCapture.CaptureScreenshotAsTexture();
+        callback(Texture);
     }
 }
