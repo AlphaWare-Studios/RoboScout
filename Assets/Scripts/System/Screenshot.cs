@@ -23,8 +23,9 @@ public class Screenshot : MonoBehaviour
             Texture = Tex;
             Texture.Apply();
             byte[] Bytes = Texture.EncodeToPNG();
-            File.WriteAllBytes(FilesDataClass.FilePathScreenshots + "/" + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".png", Bytes);
-            Manager.GetComponent<ErrorManager>().Log("Screenshot Saved as " + DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss") + ".png");
+            string ScreenshotName = DateTime.Now.ToString("M-dd-yyyy-HH.mm.ss");
+            File.WriteAllBytes(FilesDataClass.FilePathScreenshots + "/" + ScreenshotName + ".png", Bytes);
+            Manager.GetComponent<ErrorManager>().Log("Screenshot Saved as " + ScreenshotName + ".png");
         }));
     }
 
