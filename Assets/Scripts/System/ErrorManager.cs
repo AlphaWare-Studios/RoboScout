@@ -45,7 +45,7 @@ public class ErrorManager : MonoBehaviour
 	{
 		if (Type == LogType.Exception)
 		{
-			DiscordErrorReport("Error recieved at " + DateTime.Now + "\nFrom " + Application.productName + " : " + Application.version + Log + "\n-----\n" + Trace);
+			DiscordErrorReport(Log + "\n-----\n" + Trace);
 			StopAllCoroutines();
 			StartCoroutine(ErrorDisplay(Log + " " + Trace, Color.red));
 		}
