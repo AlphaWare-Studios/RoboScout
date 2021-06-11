@@ -8,6 +8,7 @@ public class StartManager : MonoBehaviour
     public GameObject Calculator;
     public GameObject Notepad;
     public GameObject FileManager;
+    public GameObject ImageViewer;
     public GameObject Music;
     public GameObject Console;
     public Transform Programs;
@@ -20,8 +21,9 @@ public class StartManager : MonoBehaviour
 
     //These are garbage and need to be redone...
     bool hasCalculatored;
-    bool hasNotepaded;
     bool hasFileded;
+    bool hasNotepaded;
+    bool hasImaged;
     bool hasMusiced;
     bool hasConsoled;
 
@@ -104,6 +106,9 @@ public class StartManager : MonoBehaviour
             case "File Manager":
                 Program.GetComponent<FileExplorer>().Wake();
                 break;
+            case "Image Viewer":
+                Program.GetComponent<Notepad>().Wake();
+                break;
             case "Music":
                 Program.GetComponent<Music>().Wake();
                 break;
@@ -123,13 +128,17 @@ public class StartManager : MonoBehaviour
         }
         if (ProgramBool == 2)
         {
-            hasNotepaded = false;
+            hasFileded = false;
         }
         if (ProgramBool == 3)
         {
-            hasFileded = false;
+            hasNotepaded = false;
         }
         if (ProgramBool == 4)
+        {
+            hasImaged = false;
+        }
+        if (ProgramBool == 5)
         {
             hasMusiced = false;
         }
@@ -157,6 +166,9 @@ public class StartManager : MonoBehaviour
                 break;
             case "File Manager":
                 Program.GetComponent<FileExplorer>().Wake();
+                break;
+            case "Image Viewer":
+                Program.GetComponent<ImageViewer>().Wake();
                 break;
             case "Music":
                 Program.GetComponent<Music>().Wake();
@@ -219,6 +231,9 @@ public class StartManager : MonoBehaviour
             case "File Manager":
                 OpenProgram(FileManager, "File Manager", null);
                 break;
+            case "Image Viewer":
+                OpenProgram(ImageViewer, "Image Viewer", null);
+                break;
             case "Music":
                 OpenProgram(Music, "Music", null);
                 break;
@@ -244,6 +259,9 @@ public class StartManager : MonoBehaviour
                 return true;
             case "FileManager":
                 OpenProgram(FileManager, "File Manager", Arguments);
+                return true;
+            case "ImageViewer":
+                OpenProgram(ImageViewer, "Image Viewer", Arguments);
                 return true;
             case "Music":
                 OpenProgram(Music, "Music", Arguments);
