@@ -39,10 +39,15 @@ public class ImageViewer : MonoBehaviour
 
 	public void Open()
 	{
-		string ImageLocation = FilesDataClass.FilePath + "/" + Directory.itemText + "/" + FileBox.text;
+		string ImageLocation = FilesDataClass.FilePath + "/" + Directory.options[Directory.value].text + "/" + FileBox.text;
+		Debug.Log(ImageLocation);
 		if (File.Exists(ImageLocation))
 		{
 			byte[] bytes = File.ReadAllBytes(ImageLocation);
+			Texture2D tex = new Texture2D(1920, 1080);
+			tex.filterMode = FilterMode.Point;
+			tex.LoadImage(bytes);
+			Image.GetComponent<RawImage>().texture = tex;
 			Manager.GetComponent<ErrorManager>().Log("Image file " + FileBox.text + " has been loaded");
 		}
 		else
