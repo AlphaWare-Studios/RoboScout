@@ -100,6 +100,5 @@ public class Init : MonoBehaviour
             DiscordRP.Status2Default = "";
         }
         Manager.GetComponent<MethodManager>().StartManaging();
-        throw new Exception();
     }
 }
