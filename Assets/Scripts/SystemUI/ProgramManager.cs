@@ -96,6 +96,32 @@ public class ProgramManager : MonoBehaviour
                         Program.transform.position = Pos;
                     }
                     break;
+                case "Image Viewer":
+                    if (!Program.gameObject.GetComponent<ImageViewer>().isMinimized)
+                    {
+                        if (Toolbar.GetComponent<ToolbarManager>().dragging)
+                        {
+                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - (225 * OffsetY));
+                            Program.transform.SetAsLastSibling();
+                        }
+                        Pos = Program.transform.position;
+                        Pos.x = Mathf.Clamp(Pos.x, 400, 1520);
+                        Pos.y = Mathf.Clamp(Pos.y, -90, 725);
+                        Program.transform.position = Pos;
+                    }
+                    else
+                    {
+                        if (Toolbar.GetComponent<ToolbarManager>().dragging)
+                        {
+                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - OffsetY);
+                            Program.transform.SetAsLastSibling();
+                        }
+                        Pos = Program.transform.position;
+                        Pos.x = Mathf.Clamp(Pos.x, 400, 1520);
+                        Pos.y = Mathf.Clamp(Pos.y, 132.5f, 947.5f);
+                        Program.transform.position = Pos;
+                    }
+                    break;
                 case "Music":
                     Program.GetComponent<Music>().Frame();
                     if (!Program.gameObject.GetComponent<Music>().isMinimized)
