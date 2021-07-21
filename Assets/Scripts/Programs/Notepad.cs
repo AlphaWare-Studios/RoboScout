@@ -43,15 +43,15 @@ public class Notepad : MonoBehaviour
 
 	public void Open()
 	{
-		if (File.Exists(FilesDataClass.FilePathNotepad + "/" + FileBox.text + ".txt"))
+		if (File.Exists(FilesDataClass.FilePathNotepad + "/" + FileBox.text))
 		{
-			byte[] bytes = File.ReadAllBytes(FilesDataClass.FilePathNotepad + "/" + FileBox.text + ".txt");
+			byte[] bytes = File.ReadAllBytes(FilesDataClass.FilePathNotepad + "/" + FileBox.text);
 			TextBox.text = Encoding.ASCII.GetString(bytes);
-			Manager.GetComponent<ErrorManager>().Log("Text file " + FileBox.text + ".txt has been loaded");
+			Manager.GetComponent<ErrorManager>().Log("Text file " + FileBox.text + " has been loaded");
 		}
 		else
 		{
-			Manager.GetComponent<ErrorManager>().Warning("Text file " + FileBox.text + ".txt does not exist");
+			Manager.GetComponent<ErrorManager>().Warning("Text file " + FileBox.text + " does not exist");
 		}
 	}
 
@@ -61,9 +61,8 @@ public class Notepad : MonoBehaviour
 			byte[] bytes = Encoding.ASCII.GetBytes(TextBox.text);
 			try
 			{
-				File.WriteAllBytes(FilesDataClass.FilePathNotepad + "/" + FileBox.text + ".txt", bytes);
-				Manager.GetComponent<ErrorManager>().Log("Text file saved as " + FileBox.text + ".txt");
-					Manager.GetComponent<ErrorManager>().Error("Unsupported characters in filename");
+				File.WriteAllBytes(FilesDataClass.FilePathNotepad + "/" + FileBox.text, bytes);
+				Manager.GetComponent<ErrorManager>().Log("File saved as " + FileBox.text);
 			}
 			catch (Exception E)
 			{
