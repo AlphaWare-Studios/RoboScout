@@ -64,6 +64,7 @@ public class ErrorManager : MonoBehaviour
 
 	void DiscordErrorReport(string Error)
 	{
+<<<<<<< master
 		using (DiscordWebHook dcWeb = new DiscordWebHook())
 		{
 			dcWeb.ProfilePicture = "https://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png";
@@ -103,5 +104,33 @@ public class DiscordWebHook : IDisposable
 	public void Dispose()
 	{
 		dWebClient.Dispose();
+=======
+		string Username = "RoboScout Error Report";
+		string PFP = "https://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png";
+		string WebHook = Keys.DiscordErrorReport;
+		WebRequest WR = (HttpWebRequest)WebRequest.Create(WebHook);
+		WR.ContentType = "application/json";
+		WR.Method = "POST";
+		using (var SW = new StreamWriter(WR.GetRequestStream()))
+        {
+			string Json = JsonConvert.SerializeObject(new
+			{
+				username = Username,
+				avatar_url = PFP,
+				message = "",
+				embeds = new[]
+                {
+					new
+                    {
+						title = "Error recieved at " + DateTime.Now + "\nFrom " + Application.productName + " : " + Application.version,
+						description = Error,
+						color = "16738816"
+					}
+                }
+			});
+			SW.Write(Json);
+        }
+		WebResponse Response = WR.GetResponse();
+>>>>>>> local
 	}
 }

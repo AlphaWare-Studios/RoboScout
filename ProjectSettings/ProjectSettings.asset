@@ -129,7 +129,11 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
+<<<<<<< master
   bundleVersion: 2.0.0 21w21a
+=======
+  bundleVersion: 2.0.0 21w29a
+>>>>>>> local
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0

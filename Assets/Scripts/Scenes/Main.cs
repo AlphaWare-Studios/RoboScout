@@ -19,8 +19,12 @@ public class Main : MonoBehaviour
     public int Year;
     public bool isDataDown;
     public bool isDone;
+<<<<<<< master
     bool isBeta;
     readonly string Passcode = "9e596f22-abe7-4211-a4d5-720e20ae2d6b";
+=======
+    string ReleaseStream;
+>>>>>>> local
 
     public void Wake()
     {
@@ -64,7 +68,7 @@ public class Main : MonoBehaviour
         using (AlphaWareWebHook AWWeb = new AlphaWareWebHook())
         {
             AWWeb.WebHook = "https://alphawarestudios.com/Data/RoboScoutTeamGetter.php";
-            AWWeb.SendMessage(Passcode, Settings.TeamNumber);
+            AWWeb.SendMessage(Keys.AlphaWareTeamCode, Settings.TeamNumber);
             AWWeb.Dispose();
         }
         return null;
