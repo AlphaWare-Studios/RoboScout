@@ -33,8 +33,6 @@ public class ImageViewer : MonoBehaviour
 		Screen.transform.Find("Filename").transform.Find("Text").GetComponentInChildren<Text>().color = new Color((float)Settings.ButtonTextColor.Red / 255, (float)Settings.ButtonTextColor.Green / 255, (float)Settings.ButtonTextColor.Blue / 255, (float)Settings.ButtonTextColor.Alpha / 255);
 		Screen.transform.Find("Open").GetComponent<Button>().colors = colorBlock;
 		Screen.transform.Find("Directory").GetComponent<Dropdown>().colors = colorBlock;
-		Screen.transform.Find("Directory").transform.Find("Placeholder").GetComponentInChildren<Text>().color = new Color((float)Settings.ButtonTextColor.Red / 255, (float)Settings.ButtonTextColor.Green / 255, (float)Settings.ButtonTextColor.Blue / 255, (float)Settings.ButtonTextColor.Alpha / 255);
-		Screen.transform.Find("Directory").transform.Find("Text").GetComponentInChildren<Text>().color = new Color((float)Settings.ButtonTextColor.Red / 255, (float)Settings.ButtonTextColor.Green / 255, (float)Settings.ButtonTextColor.Blue / 255, (float)Settings.ButtonTextColor.Alpha / 255);
 	}
 
 	public void Open()
@@ -48,6 +46,7 @@ public class ImageViewer : MonoBehaviour
 			tex.filterMode = FilterMode.Point;
 			tex.LoadImage(bytes);
 			Image.GetComponent<RawImage>().texture = tex;
+
 			Manager.GetComponent<ErrorManager>().Log("Image file " + FileBox.text + " has been loaded");
 		}
 		else

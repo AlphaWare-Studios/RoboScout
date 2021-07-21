@@ -19,7 +19,7 @@ public class Main : MonoBehaviour
     public int Year;
     public bool isDataDown;
     public bool isDone;
-    bool isBeta;
+    string ReleaseStream;
     readonly string Passcode = "9e596f22-abe7-4211-a4d5-720e20ae2d6b";
 
     public void Wake()
@@ -50,7 +50,7 @@ public class Main : MonoBehaviour
         SettingsClass Settings = Manager.GetComponent<FileManager>().Settings;
         TeamNumber.text = Settings.TeamNumber.ToString();
         ScouterName.text = Settings.ScouterName;
-        isBeta = Settings.isBetaEnabled;
+        ReleaseStream = Settings.ReleaseStream;
         if (Settings.Version != Application.version)
         {
             ChangelogTitle.text = "Welcome to RoboScout " + Application.version;
@@ -80,21 +80,22 @@ public class Main : MonoBehaviour
         AWClass Data = Manager.GetComponent<AWManager>().AWStatusData;
         if (Data != null)
         {
-            if (!isBeta)
+            switch (ReleaseStream)
             {
-                if (Data.LatestVersion != Application.version)
-                {
-                    UpdateButtonText.text = "Version " + Data.LatestVersion + " out now!";
-                    UpdateButton.SetActive(true);
-                }
-            }
-            else
-            {
-                if (Data.LatestBetaVersion != Application.version)
-                {
-                    UpdateButtonText.text = "Beta Version " + Data.LatestBetaVersion + " out now!";
-                    UpdateButton.SetActive(true);
-                }
+                case "Release":
+                    if (Data.LatestVersion != Application.version)
+                    {
+                        UpdateButtonText.text = "Version " + Data.LatestVersion + " out now!";
+                        UpdateButton.SetActive(true);
+                    }
+                    break;
+                case "Beta":
+                    if (Data.LatestBetaVersion != Application.version)
+                    {
+                        UpdateButtonText.text = "Beta Version " + Data.LatestBetaVersion + " out now!";
+                        UpdateButton.SetActive(true);
+                    }
+                    break;
             }
             this.GetComponent<NewsManager>().SetNews(Data);
         }

@@ -21,8 +21,8 @@ public class Settings : MonoBehaviour
 	public InputField TeamNumber;
 	public InputField ScouterName;
 	public Dropdown LangDropdown;
-	public string CurrentLanguage;
-	public Toggle isBetaEnabled;
+	string CurrentLanguage;
+	public Dropdown ReleaseStreamDropdown;
 	public Toggle isDataEnabled;
 	public Toggle FSToggle;
 	public Dropdown QualityDropdown;
@@ -68,8 +68,9 @@ public class Settings : MonoBehaviour
 		SettingsClass Settings = Manager.GetComponent<FileManager>().Settings;
 		TeamNumber.text = Settings.TeamNumber.ToString();
 		ScouterName.text = Settings.ScouterName;
+		ReleaseStreamDropdown.value = ReleaseStreamDropdown.options.FindIndex(option => option.text == Settings.ReleaseStream);
+		LangDropdown.value = LangDropdown.options.FindIndex(option => option.text == Settings.Language);
 		CurrentLanguage = Settings.Language;
-		isBetaEnabled.isOn = Settings.isBetaEnabled;
 		isDataEnabled.isOn = true;
 		VolumeSlider.value = Settings.Volume;
 		VolumeText.text = ((Settings.Volume + 80) * 1.25f).ToString().Split('.')[0] + "%";
@@ -109,36 +110,33 @@ public class Settings : MonoBehaviour
 		OffsetY = ResolutionManager.ScreenOffsetH;
 		LangDropdown.ClearOptions();
 		List<string> Languages = new List<string>();
+		LanguageClass Language = new LanguageClass();
 		string matching = "*.lang";
-		int Langi = 0;
-		int CurrentLanguageIndex = 0;
 		foreach (string file in Directory.GetFiles(FilesDataClass.FilePathLanguage, matching))
 		{
-			Langi++;
+			Debug.Log("CL: " + CurrentLanguage);
 			byte[] bytes = File.ReadAllBytes(file);
 			string JSON = Encoding.ASCII.GetString(bytes);
-			LanguageClass Language;
 			Language = JsonUtility.FromJson<LanguageClass>(JSON);
 			if (Language.Version == "v1")
 			{
 				if (Language.LanguageName != null || Language.LanguageName != "")
 				{
+					Debug.Log(Language.LanguageName);
 					Languages.Add(Language.LanguageName);
-					if (Language.LanguageName == CurrentLanguage)
-					{
-						CurrentLanguageIndex = Langi;
-					}
 				}
 			}
-			if (Languages.Count == 0)
-			{
-				//Regenerate language files
-			}
-			LangDropdown.AddOptions(Languages);
-			LangDropdown.value = Langi;
-			LangDropdown.RefreshShownValue();
 		}
-
+		if (Languages.Count == 0)
+		{
+			//Regenerate language files
+		}
+		LangDropdown.AddOptions(Languages);
+		if (Language.LanguageName == CurrentLanguage)
+		{
+			LangDropdown.value = LangDropdown.options.FindIndex(option => option.text == Language.LanguageName);
+		}
+		LangDropdown.RefreshShownValue();
 		FSToggle.isOn = Screen.fullScreen;
 		QualityDropdown.value = QualitySettings.GetQualityLevel();
 		Resolutions = Screen.resolutions;
@@ -202,8 +200,8 @@ public class Settings : MonoBehaviour
 			Version = Application.version,
 			TeamNumber = int.Parse(TeamNumber.text),
 			ScouterName = ScouterName.text,
-			Language = "English",
-			isBetaEnabled = isBetaEnabled.isOn,
+			Language = LangDropdown.options[LangDropdown.value].text,
+			ReleaseStream = ReleaseStreamDropdown.options[ReleaseStreamDropdown.value].text,
 			Volume = VolumeFloat,
 			is24Hour = is24Hour.isOn,
 			isTooltipsEnabled = isTooltipsEnabled.isOn,

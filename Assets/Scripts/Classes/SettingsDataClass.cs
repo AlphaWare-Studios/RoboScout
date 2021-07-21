@@ -7,7 +7,8 @@ public class SettingsClass
     public string Version;
     public int TeamNumber;
     public string ScouterName;
-    public bool isBetaEnabled;
+    public string Language;
+    public string ReleaseStream;
     public float DisplayScaling;
     public float Volume;
     public bool is24Hour;
@@ -16,7 +17,6 @@ public class SettingsClass
     public int[] QuestionType;
     public string[] Questions;
     public int[] QuestionValue;
-    public string Language;
     public string UIStyle;
     public SettingsInterfaceColors TitleColor;
     public SettingsInterfaceColors BackColor;
