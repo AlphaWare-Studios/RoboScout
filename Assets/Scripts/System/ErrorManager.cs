@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Net;
@@ -44,9 +45,9 @@ public class ErrorManager : MonoBehaviour
 	{
 		if (Type == LogType.Exception)
 		{
-			DiscordErrorReport(Log + "\n-----\n" + Trace);
+			DiscordErrorReport("Error recieved at " + DateTime.Now + "\nFrom " + Application.productName + " : " + Application.version + "\n-----\n" + Log + "\n-----\n" + Trace);
 			StopAllCoroutines();
-			StartCoroutine(ErrorDisplay(Log + " " + Trace, Color.red));
+			StartCoroutine(ErrorDisplay(Log + "\n-----\n" + Trace, Color.red));
 		}
 	}
 
@@ -62,46 +63,72 @@ public class ErrorManager : MonoBehaviour
 		ErrorBox.SetActive(false);
 	}
 
-	void DiscordErrorReport(string Error)
+	void DiscordErrorReport(string Message)
 	{
-			using (DiscordWebHook dcWeb = new DiscordWebHook())
+		using (DiscordWebHook dcWeb = new DiscordWebHook())
+		{
+			dcWeb.SendMessage(Message);
+			dcWeb.Dispose();
+		}
+	}
+}
+
+public class DiscordWebHook : IDisposable
+{
+	private WebClient dWebClient;
+
+	public DiscordWebHook()
+	{
+		dWebClient = new WebClient();
+	}
+
+	public void SendMessage(string msgSend)
+	{
+		WebRequest WR = (HttpWebRequest)WebRequest.Create(Keys.DiscordErrorReport);
+		WR.ContentType = "application/json";
+		WR.Method = "POST";
+		using (var SW = new StreamWriter(WR.GetRequestStream()))
+		{
+			embed embed = new embed
 			{
-				dcWeb.ProfilePicture = "https://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png";
-				dcWeb.UserName = "RoboScout Error Report";
-				dcWeb.WebHook = Keys.DiscordErrorReport;
-				string Message = Error;
-
-				dcWeb.SendMessage(Message);
-				dcWeb.Dispose();
-			}
+				title = "Error recieved at " + DateTime.Now + "\nFrom " + Application.productName + " : " + Application.version,
+				description = msgSend,
+				color = "16738816"
+			};
+			embed[] EmbedArr = new embed[1] {embed};
+			DiscordWebHookValues Values = new DiscordWebHookValues
+			{
+				username = "RoboScout Error Report",
+				avatar_url = "https://alphawarestudios.com/Assets/Sprites/RoboScout-Logo.png",
+				message = "",
+				embeds = EmbedArr
+			};
+			string Json = JsonUtility.ToJson(Values);
+			Debug.Log(Json);
+			SW.Write(Json);
 		}
+		WebResponse Response = WR.GetResponse();
 	}
 
-	public class DiscordWebHook : IDisposable
+	public void Dispose()
 	{
-		private WebClient dWebClient;
-		private static NameValueCollection discordValues = new NameValueCollection();
-		public string WebHook { get; set; }
-		public string UserName { get; set; }
-		public string ProfilePicture { get; set; }
-
-		public DiscordWebHook()
-		{
-			dWebClient = new WebClient();
-		}
-
-		public void SendMessage(string msgSend)
-		{
-			discordValues.Clear();
-			discordValues.Add("username", UserName);
-			discordValues.Add("avatar_url", ProfilePicture);
-			discordValues.Add("content", msgSend);
-
-			dWebClient.UploadValues(WebHook, discordValues);
-		}
-
-		public void Dispose()
-		{
-			dWebClient.Dispose();
-		}
+		dWebClient.Dispose();
 	}
+}
+
+[Serializable]
+public class DiscordWebHookValues
+{
+	public string username;
+	public string avatar_url;
+	public string message;
+	public embed[] embeds;
+}
+
+[Serializable]
+public class embed
+{
+	public string title;
+	public string description;
+	public string color;
+}
