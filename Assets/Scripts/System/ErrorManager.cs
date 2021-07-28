@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Collections;
-using System.Collections.Specialized;
 using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
@@ -104,7 +103,6 @@ public class DiscordWebHook : IDisposable
 				embeds = EmbedArr
 			};
 			string Json = JsonUtility.ToJson(Values);
-			Debug.Log(Json);
 			SW.Write(Json);
 		}
 		WebResponse Response = WR.GetResponse();

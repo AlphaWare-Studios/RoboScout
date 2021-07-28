@@ -23,7 +23,7 @@ public class ProgramManager : MonoBehaviour
                     {
                         if (Toolbar.GetComponent<ToolbarManager>().dragging)
                         {
-                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - (275 * OffsetY));
+                            Program.transform.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y - (300 * OffsetY));
                             Program.transform.SetAsLastSibling();
                         }
                         Pos = Program.transform.position;

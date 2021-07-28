@@ -7,9 +7,11 @@ public class Calculator : MonoBehaviour
     public GameObject Manager;
     public GameObject CalcProgram;
     public RectTransform CalcRT;
+    public GameObject TopMenu;
     public GameObject Screen;
     public GameObject Buttons;
-    public GameObject Border;
+    public GameObject Border1;
+    public GameObject Border2;
     public bool isMinimized;
     public bool hasCrashed;
     public Text Main;
@@ -30,6 +32,10 @@ public class Calculator : MonoBehaviour
     public GameObject Row3;
     public GameObject Row4;
     public GameObject Row5;
+    string CalcType;
+    public Text Title;
+    public GameObject SideMenu;
+    bool isMenu;
 
     public void Wake()
     {
@@ -76,7 +82,34 @@ public class Calculator : MonoBehaviour
                 child.GetComponentsInChildren<Text>()[0].color = new Color((float)Settings.PanelTextColor.Red / 255, (float)Settings.PanelTextColor.Green / 255, (float)Settings.PanelTextColor.Blue / 255, (float)Settings.PanelTextColor.Alpha / 255);
             }
         }
+        foreach (Transform child in TopMenu.transform)
+        {
+            if (child.name == "Menu")
+            {
+                child.GetComponent<Button>().colors = colorBlock;
+            }
+        }
+        SideMenu.GetComponent<Image>().color = new Color((float)Settings.PanelColor.Red / 255, (float)Settings.PanelColor.Green / 255, (float)Settings.PanelColor.Blue / 255, (float)Settings.PanelColor.Alpha / 255);
+        Title.color = new Color((float)Settings.ButtonTextColor.Red / 255, (float)Settings.ButtonTextColor.Green / 255, (float)Settings.ButtonTextColor.Blue / 255, (float)Settings.ButtonTextColor.Alpha / 255);
+        isMenu = false;
+        SideMenu.SetActive(false);
         Clear();
+    }
+
+    public void Menu()
+    {
+        switch (isMenu)
+        {
+            case false:
+                SideMenu.SetActive(true);
+                isMenu = true;
+                break;
+
+            case true:
+                SideMenu.SetActive(false);
+                isMenu = false;
+                break;
+        }
     }
 
     void Clear()
@@ -378,11 +411,15 @@ public class Calculator : MonoBehaviour
         if (!isMinimized)
         {
             isMinimized = true;
+            TopMenu.SetActive(false);
             Screen.SetActive(false);
             Buttons.SetActive(false);
-            Border.SetActive(false);
+            Border1.SetActive(false);
+            Border2.SetActive(false);
+            SideMenu.SetActive(false);
+            isMenu = false;
             CalcRT.sizeDelta = new Vector2(CalcRT.sizeDelta.x, 55);
-            CalcProgram.transform.position = new Vector2(CalcProgram.transform.position.x, CalcProgram.transform.position.y + (272.5f * ResolutionManager.ScreenOffsetH));
+            CalcProgram.transform.position = new Vector2(CalcProgram.transform.position.x, CalcProgram.transform.position.y + (297.5f * ResolutionManager.ScreenOffsetH));
         }
     }
 
@@ -391,11 +428,13 @@ public class Calculator : MonoBehaviour
         if (isMinimized)
         {
             isMinimized = false;
+            TopMenu.SetActive(true);
             Screen.SetActive(true);
             Buttons.SetActive(true);
-            Border.SetActive(true);
-            CalcRT.sizeDelta = new Vector2(CalcRT.sizeDelta.x, 600);
-            CalcProgram.transform.position = new Vector2(CalcProgram.transform.position.x, CalcProgram.transform.position.y - (272.5f * ResolutionManager.ScreenOffsetH));
+            Border1.SetActive(true);
+            Border2.SetActive(true);
+            CalcRT.sizeDelta = new Vector2(CalcRT.sizeDelta.x, 650);
+            CalcProgram.transform.position = new Vector2(CalcProgram.transform.position.x, CalcProgram.transform.position.y - (297.5f * ResolutionManager.ScreenOffsetH));
         }
     }
 

@@ -70,8 +70,9 @@ public class Init : MonoBehaviour
             Directory.CreateDirectory(FilesDataClass.FilePathScreenshots);
         }
         string[] args = Environment.GetCommandLineArgs();
-        if (args.Length > 0)
+        /*if (args.Length > 0)
         {
+            Debug.Log(args[1]);
             if (File.Exists(args[1]))
             {
                 if (args[1].EndsWith(".rs"))
@@ -89,7 +90,7 @@ public class Init : MonoBehaviour
 
                 }
             }
-        }
+        }*/
         if (Application.isEditor)
         {
             DiscordRP.Status2Default = "Developing";
