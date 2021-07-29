@@ -81,8 +81,10 @@ public class Splash : MonoBehaviour
         texts[52] = "FIRST Season";
         texts[53] = "Pickup that can";
         texts[54] = "Any computer is a laptop if your brave enough";
-        texts[55] = "Rise and shine, mister Freeman.";
-        //texts[66] = "texts[66]";
+        texts[55] = "Rise and shine, Mister Freeman.";
+        //texts[64] = "A stack of spash";
+        //texts[65] = "texts[65]";
+        //texts[66] = "Execute order 66";
         //texts[69] = "nice";
         SID = UnityEngine.Random.Range(1, 56);
         splash.text = texts[SID];

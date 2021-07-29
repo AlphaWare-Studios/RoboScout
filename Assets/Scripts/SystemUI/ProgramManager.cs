@@ -28,7 +28,7 @@ public class ProgramManager : MonoBehaviour
                         }
                         Pos = Program.transform.position;
                         Pos.x = Mathf.Clamp(Pos.x, 200, 1720);
-                        Pos.y = Mathf.Clamp(Pos.y, -140, 675);
+                        Pos.y = Mathf.Clamp(Pos.y, -165, 650);
                         Program.transform.position = Pos;
                     }
                     else
