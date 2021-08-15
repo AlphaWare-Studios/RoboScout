@@ -38,7 +38,6 @@ public class ViewManager : MonoBehaviour
 
     void UpdatePanel(string lvl)
     {
-        StartCoroutine(DiscordRP.UpdateActivity(lvl, null));
         Manager.GetComponent<SystemUIManager>().ContentSwap(lvl);
     }
 

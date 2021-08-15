@@ -31,7 +31,6 @@ public class MethodManager : MonoBehaviour
 		Manager.GetComponent<ColorManager>().Wake();
 		Manager.GetComponent<Tooltip>().Wake();
 		Manager.GetComponent<ExportManager>().Wake();
-		Manager.GetComponent<DiscordRP>().Wake();
 		Manager.GetComponent<Paralax>().Wake();
 		MainManager.GetComponent<Main>().Wake();
 		MainManager.GetComponent<Splash>().Wake();
@@ -64,7 +63,6 @@ public class MethodManager : MonoBehaviour
 			Manager.GetComponent<ViewManager>().Frame();
 			Manager.GetComponent<SystemUIManager>().Frame();
 			Manager.GetComponent<Tooltip>().Frame();
-			Manager.GetComponent<DiscordRP>().Frame();
 			Manager.GetComponent<Paralax>().Frame();
 			Manager.GetComponent<ProgramManager>().Frame();
 			Manager.GetComponent<Screenshot>().Frame();

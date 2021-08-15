@@ -170,7 +170,6 @@ public class Music : MonoBehaviour
             Source.clip = clip;
             Source.Play();
         }
-        StartCoroutine(DiscordRP.UpdateActivity(null, "Listening to music(" + Path.GetFileNameWithoutExtension(path) + ")"));
         LoopCheck();
         StartCoroutine(Loop());
     }
@@ -229,7 +228,6 @@ public class Music : MonoBehaviour
 
     public void Stop()
     {
-        StartCoroutine(DiscordRP.UpdateActivity(null, "Default"));
         StopCoroutine(Loop());
         hasStarted = false;
         isPaused = false;
@@ -429,7 +427,6 @@ public class Music : MonoBehaviour
 
     public void Close()
     {
-        StartCoroutine(DiscordRP.UpdateActivity(null, "Default"));
         Source.Stop();
         GameObject.Destroy(MusicProgram);
     }

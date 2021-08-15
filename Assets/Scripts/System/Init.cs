@@ -91,15 +91,6 @@ public class Init : MonoBehaviour
                 }
             }
         }*/
-        if (Application.isEditor)
-        {
-            DiscordRP.Status2Default = "Developing";
-            StartCoroutine(DiscordRP.UpdateActivity(null, "Developing"));
-        }
-        else
-        {
-            DiscordRP.Status2Default = "";
-        }
         Manager.GetComponent<MethodManager>().StartManaging();
     }
 }
