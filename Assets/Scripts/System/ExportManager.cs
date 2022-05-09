@@ -29,7 +29,7 @@ public class ExportManager : MonoBehaviour
 	public void Wake()
 	{
 		PackageManager.SetActive(false);
-		IgnoreQuestions.isOn = true;
+		IgnoreQuestions.isOn = false;
 	}
 
 	public void Import(string Type)
@@ -79,26 +79,26 @@ public class ExportManager : MonoBehaviour
 		FilesPackageClass Package;
 		Package = JsonUtility.FromJson<FilesPackageClass>(JSONfile);
 		if (Package.SaveVersion == "v1")
-        {
+		{
 			Debug.Log(Package.FilesCount);
 			for (int i = 0; i < Package.FilesCount; i++)
-            {
+			{
 				if (!File.Exists(Package.FilesInfo[i] + ".rs"))
-                {
+				{
 
-                }
+				}
 				else
-                {
+				{
 
-                }
-            }
+				}
+			}
 			while (!hasAnswered)
-            {
+			{
 				yield return null;
-            }
-        }
+			}
+		}
 		else
-        {
+		{
 			Manager.GetComponent<ErrorManager>().Warning("Scouting package " + Path.GetFileName(path) + " is from a future version and cannot be opened");
 		}
 		yield return null;
@@ -237,34 +237,88 @@ public class ExportManager : MonoBehaviour
 			Current++;
 			Errors.text = "Exported: " + CompFiles.Count + "   Errors: " + ErrorsCount.ToString();
 		}
+		List<string> Output = new List<string>();
 		string[] Rounds = new string[InfoFiles.Count];
 		string[] Teams = new string[InfoFiles.Count];
-		int i;
-		i = 0;
-		foreach (string Round in Rounds)
-        {
-			Rounds[i] = InfoFiles[i].Split('-')[0];
-        }
-		i = 0;
-		foreach (string Team in Teams)
+		int Filei = 0;
+		foreach (string File in InfoFiles)
 		{
-			Teams[i] = InfoFiles[i].Split('-')[1];
+			Rounds[Filei] = InfoFiles[Filei].Split('-')[0];
+			Teams[Filei] = InfoFiles[Filei].Split('-')[1];
+			Filei++;
 		}
-		string[] Output;
-		if (IgnoreQuestions.isOn)
-        {
-			Output = new string[10];
-			int x = 0;
-			int y = 0;
+		Rounds = Rounds.Distinct().ToArray();
+		Teams = Teams.Distinct().ToArray();
+		List<FilesClass> QuestionVariants = CompFiles.GroupBy(x => x.Questions).Select(y => y.First()).Distinct().ToList();
+		int Matchi = 0;
+		foreach (string Match in Rounds)
+		{
+			Output.Add(GenerateHeader(Match, Teams, 1));
+			string[] VariantBuilder = new string[25];
+			int Varianti = 0;
+			string[] MatchString = new string[25];
 			foreach (FilesClass File in CompFiles)
 			{
-				
+				MatchString = new string[25];
+				int Questioni = 0;
+				foreach (string Question in File.Questions)
+				{
+					int Teami = 0;
+					foreach (string Team in Teams)
+					{
+						int i = InfoFiles.IndexOf(Match + "-" + Team);
+						if (i != -1)
+						{
+							if (Teami == 0)
+							{
+								MatchString[Questioni] += Question.Split('|')[0] + ",";
+							}
+							if (CompFiles[i].QuestionsType[Questioni] != 0)
+							{
+								MatchString[Questioni] += CompFiles[i].Answers[Questioni] + ",";
+							}
+							else
+							{
+								MatchString[Questioni] += ",";
+							}
+							/*if (CompFiles[i].Questions == File.Questions)
+							{
+								if (CompFiles[i].QuestionsType[Questioni] != 0)
+								{
+									VariantBuilder[Questioni] += CompFiles[i].Answers[Questioni] + ",";
+								}
+								else
+								{
+									VariantBuilder[Questioni] += ",";
+								}
+							}
+							else
+							{
+								VariantBuilder[Questioni] += ",";
+							}*/
+						}
+						else
+						{
+							MatchString[Questioni] += ",";
+						}
+						Teami++;
+					}
+					MatchString[Questioni] += ",";
+					Questioni++;
+				}
+				Varianti++;
 			}
+			foreach (string T in MatchString)
+			{
+				if (T != null)
+				{
+					Output.Add(T);
+				}
+			}
+			Output.Add("");
+			Matchi++;
 		}
-		else
-        {
-			Output = new string[1];
-        }
+		
 
 		StreamWriter outputFile = new StreamWriter(path);
 		foreach (string line in Output)
@@ -284,14 +338,31 @@ public class ExportManager : MonoBehaviour
 		yield return null;
 	}
 
+	string GenerateHeader(string Match, string[] Teams, int Questions)
+	{
+		string Output = "";
+		for (int i = 0; i < Questions; i++)
+		{
+			Output += "Match " + Match + ",";
+			foreach (string Team in Teams)
+			{
+				Output = Output + Team + ",";
+			}
+			Output += ",";
+		}
+		return Output;
+	}
+
 	public void Ignore()
 	{
-		
+		hasAnswered = true;
+		WillOverwrite = false;
 	}
 
 	public void Overwrite()
 	{
-		
+		hasAnswered = true;
+		WillOverwrite = true;
 	}
 
 	public void Confirm()

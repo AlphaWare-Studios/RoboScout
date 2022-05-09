@@ -44,6 +44,14 @@ public class ColorManager : MonoBehaviour
 			tex.LoadImage(backbytes);
 			hasBackground = true;
 		}
+		else if (File.Exists(FilesDataClass.FilePath + "/Background.jpg"))
+		{
+			byte[] backbytes = File.ReadAllBytes(FilesDataClass.FilePath + "/Background.jpg");
+			tex = new Texture2D(Screen.width, Screen.height);
+			tex.filterMode = FilterMode.Point;
+			tex.LoadImage(backbytes);
+			hasBackground = true;
+		}
 		foreach (RawImage Background in Backgrounds)
 		{
 			if (Background != null)

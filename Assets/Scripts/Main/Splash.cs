@@ -25,7 +25,7 @@ public class Splash : MonoBehaviour
         {
             Random += Characters[UnityEngine.Random.Range(0, 62)];
         }
-        texts = new string[56];
+        texts = new string[57];
         texts[0] = "This will never be seen :(";
         texts[1] = "Unknown lines of code";
         texts[2] = "Yes";
@@ -82,11 +82,12 @@ public class Splash : MonoBehaviour
         texts[53] = "Pickup that can";
         texts[54] = "Any computer is a laptop if your brave enough";
         texts[55] = "Rise and shine, Mister Freeman.";
+        texts[56] = "That's no moon!.";
         //texts[64] = "A stack of spash";
         //texts[65] = "texts[65]";
         //texts[66] = "Execute order 66";
         //texts[69] = "nice";
-        SID = UnityEngine.Random.Range(1, 56);
+        SID = UnityEngine.Random.Range(1, 57);
         splash.text = texts[SID];
         if (SID == 52)
         {

@@ -149,28 +149,7 @@ public class QR : MonoBehaviour
 			Files = CompFiles.Select(i => i).ToArray()
 		};
 		Data = JsonUtility.ToJson(Package, false);
-		if (UseHighDensity.isOn)
-		{
-			if (UseCompression.isOn)
-			{
-				Compress(Data, true, true);
-			}
-			else
-			{
-				Compress(Data, true, false);
-			}
-		}
-		else
-		{
-			if (UseCompression.isOn)
-			{
-				Compress(Data, false, true);
-			}
-			else
-			{
-				Compress(Data, false, false);
-			}
-		}
+		Compress(Data, UseHighDensity.isOn, UseCompression.isOn);
 	}
 
 	Texture2D GenerateBarcode(string data, int width, int height, Color color)
@@ -563,14 +542,15 @@ public class QR : MonoBehaviour
 			Img1.filterMode = FilterMode.Point;
 			Img2.filterMode = FilterMode.Point;
 			Img3.filterMode = FilterMode.Point;
-			Debug.Log(SystemInfo.processorCount);
 			if (SystemInfo.processorCount < 4)
 			{
 				StartCoroutine(QRScanFallback(10));
 			}
 			else
 			{
-				StartCoroutine(QRScanManager(10));
+				StartCoroutine(QRScanFallback(10));
+				//I hate unity -_-
+				//StartCoroutine(QRScanManager(10));
 			}
 		}
 	}
@@ -615,11 +595,10 @@ public class QR : MonoBehaviour
     {
 		if (hasScanned == false && Scan.activeSelf)
 		{
-			Scr.SetPixels(Colors);
-			Scr.Apply();
 			Screen.texture = Scr;
 			Colors = Camera.GetPixels();
 			int CameraLen = Camera.GetPixels32().Length;
+			Percent = 0;
 			for (int i = 0; i < 4; i++)
 			{
 				new Thread(delegate () { QRScan(i, Colors, CameraLen); }).Start();
@@ -632,7 +611,6 @@ public class QR : MonoBehaviour
 
 	void QRScan(int ThreadNum, Color[] Colors, int CameraLen)
 	{
-		Percent = 0;
 		switch (ThreadNum)
 		{
 			case 1:

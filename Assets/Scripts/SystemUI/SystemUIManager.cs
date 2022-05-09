@@ -81,13 +81,17 @@ public class SystemUIManager : MonoBehaviour
 
     public void Second()
     {
-        int fps = Frames;
-        FPSText.text = (fps.ToString() + " FPS");
-        if (isCalculated != true)
+        if (isCalculated)
+        {
+            FPSText.text = (Frames.ToString() + " FPS");
+            Frames = 0;
+        }
+        else
         {
             FPSText.text = "? FPS";
+            isCalculated = true;
+            Frames = 0;
         }
-        Frames = 0;
         if (is24Hour)
         {
             Time = DateTime.Now.ToString("HH:mm");
@@ -226,8 +230,6 @@ public class SystemUIManager : MonoBehaviour
                 hasConnection = true;
                 break;
         }
-        FPSText.text = (fps.ToString() + " FPS");
-        isCalculated = true;
     }
 
     void CLS()

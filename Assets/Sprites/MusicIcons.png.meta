@@ -57,6 +57,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -66,8 +67,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -88,6 +89,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -173,7 +176,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 844510665545272b0800000000000000
-      internalID: -5588311461853047736
+      internalID: 4890007881442035924
       vertices: []
       indices: 
       edges: []
@@ -194,7 +197,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7cb6a275de3f11950800000000000000
-      internalID: 6418179144674864071
+      internalID: -3282454626670465804
       vertices: []
       indices: 
       edges: []
@@ -215,7 +218,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 1a90f25d681c6c900800000000000000
-      internalID: 704463176576469409
+      internalID: -8461557065075577624
       vertices: []
       indices: 
       edges: []
@@ -236,7 +239,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: dfa023dfbc1c27410800000000000000
-      internalID: 1473453109974010621
+      internalID: 4145333430390129692
       vertices: []
       indices: 
       edges: []
@@ -257,7 +260,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ab754a413708b4530800000000000000
-      internalID: 3840304339019388858
+      internalID: 5823619080577095466
       vertices: []
       indices: 
       edges: []
@@ -293,6 +296,13 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      MusicIcons_3: 4145333430390129692
+      MusicIcons_4: 5823619080577095466
+      MusicIcons_1: -3282454626670465804
+      MusicIcons_0: 4890007881442035924
+      MusicIcons_2: -8461557065075577624
+      MusicIcons_5: 5963675842870442239
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
